@@ -293,7 +293,6 @@ argo_output() {
 Vmess+ws+Argo隧道：
 vmess://$(echo -n "$VMESS" | base64 -w0)
 
-
 EOF
 }
 
@@ -308,6 +307,7 @@ s5_output() {
 
 Socks5代理
 IP地址:$HOST_IP
+端口:$S5_PORT
 用户名:$S5_USER
 密码:$S5_PASSWORD
 
