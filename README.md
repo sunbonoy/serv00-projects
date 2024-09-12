@@ -40,4 +40,4 @@ bash <(curl -s https://raw.githubusercontent.com/sunbonoy/serv00-projects/main/s
 
 - Serv00杀进程厉害，特别是明显特征的程序，所有这些程序都改名运行了；并且需要增加进程检测保活脚本。
 
-- 进程检测保活脚本：[check-process.sh](https://github.com/sunbonoy/serv00-projects/blob/main/check-process.sh)，供参考；需要添加进定时任务内，比如每小时运行；可在Serv00服务面板上添加，也可`crontab -e`直接编辑添加任务。
+- 进程检测保活脚本：[check-process.sh](https://github.com/sunbonoy/serv00-projects/blob/main/check-process.sh)，**仅供参考**；需要添加进定时任务内，比如每小时运行；可在Serv00服务面板上添加，也可`crontab -e`直接编辑添加任务。
