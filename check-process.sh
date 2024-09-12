@@ -2,7 +2,7 @@
 
 USER=$(whoami)
 USER_HOME=$(readlink -f /home/$USER)
-log_file="$USER_HOME/logfile.log"  # 写入日志文件路径
+log_file="$USER_HOME/sh/logfile.log"  # 写入日志文件路径
 
 # 创建日志文件
 touch "$log_file"
@@ -29,16 +29,16 @@ do
         case "$process_name" in 
         "x5")
         # 启动 xray 的命令
-	    nohup $USER_HOME/.xray/x5 -c $USER_HOME/.xray/config-serv00.json >/dev/null 2>&1 &
-	    nohup $USER_HOME/.xray/x5 -c $USER_HOME/.xray/config-s5.json >/dev/null 2>&1 &
+	    nohup "$USER_HOME/.xray/x5" -c "$USER_HOME/.xray/config-serv00.json" >/dev/null 2>&1 &
+	    nohup "$USER_HOME/.xray/x5" -c "$USER_HOME/.xray/config-s5.json" >/dev/null 2>&1 &
         ;;
         "argo")
         # 启动 cloudflared 的命令
-        nohup $USER_HOME/.cloudflared/argo tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token "your token" >/dev/null 2>&1 & #填入你的token
+        nohup "$USER_HOME/.cloudflared/argo" tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token "your token" >/dev/null 2>&1 & #填入你的token
         ;;
 		"web")
         # 启动 xray 的命令
-	    nohup $USER_HOME/.hysteria/web server $USER_HOME/.hysteria/config.yaml >/dev/null 2>&1 &
+	    nohup "$USER_HOME/.hysteria/web" server "$USER_HOME/.hysteria/config.yaml" >/dev/null 2>&1 &
 	    ;;
         *)
         echo "Unknown process: $process_name"
