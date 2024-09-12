@@ -1,6 +1,8 @@
 #!/bin/bash
 
-log_file="/home/bouray/sh/logfile.log"  # 写入日志文件路径
+USER=$(whoami)
+USER_HOME=$(readlink -f /home/$USER)
+log_file="$USER_HOME/logfile.log"  # 写入日志文件路径
 
 # 创建日志文件
 touch "$log_file"
@@ -27,16 +29,16 @@ do
         case "$process_name" in 
         "x5")
         # 启动 xray 的命令
-	    nohup /home/bouray/.xray/x5 -c /home/bouray/.xray/config-serv00.json &
-	    nohup /home/bouray/.xray/x5 -c /home/bouray/.xray/config-s5.json &
+	    nohup $USER_HOME/.xray/x5 -c $USER_HOME/.xray/config-serv00.json >/dev/null 2>&1 &
+	    nohup $USER_HOME/.xray/x5 -c $USER_HOME/.xray/config-s5.json >/dev/null 2>&1 &
         ;;
         "argo")
         # 启动 cloudflared 的命令
-        nohup /home/bouray/.cloudflared/argo tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token eyJhIjoiYzFjZDk0NzY4NjViMzY0MDY2Y2ZjOTFlZTc0NmFjOGIiLCJ0IjoiNmU2NTI3MzQtOTBjZC00YjE2LTg4NjItYzk4ZTFhZTlhNWU5IiwicyI6Ill6RTNPREZqTVdFdE4yTXpNeTAwWVROakxUZzJZbUl0TXpkbE1UUTNORGhpTURSbSJ9 >/dev/null 2>&1 &
+        nohup $USER_HOME/.cloudflared/argo tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token "your token" >/dev/null 2>&1 & #填入你的token
         ;;
 		"web")
         # 启动 xray 的命令
-	    nohup /home/bouray/.hysteria/web server /home/bouray/.hysteria/config.yaml &
+	    nohup $USER_HOME/.hysteria/web server $USER_HOME/.hysteria/config.yaml >/dev/null 2>&1 &
 	    ;;
         *)
         echo "Unknown process: $process_name"
