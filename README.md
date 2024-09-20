@@ -40,9 +40,18 @@ bash <(curl -s https://raw.githubusercontent.com/sunbonoy/serv00-projects/main/s
 
 - Serv00杀进程厉害，特别是明显特征的程序，所有这些程序都改名运行了；并且需要增加进程检测保活脚本。
 
-- 进程检测保活脚本：[check-process.sh](https://github.com/sunbonoy/serv00-projects/blob/main/check-process.sh)，**仅供参考**；需要添加进定时任务内，比如每小时运行；可在Serv00服务面板上添加，也可`crontab -e`直接编辑添加任务。
+- 进程检测保活脚本：[check-process.sh](https://github.com/sunbonoy/serv00-projects/blob/main/check-process.sh)，供参考；需要添加进定时任务内，比如每小时运行一次这个脚本，可在Serv00服务面板上添加。
 
-> [!注意]
-> Serv00的ip访问应该是被墙了，2024-9
-> 只有用argo隧道才能连接，Hysteria基本废了。
+- 也可用指令`crontab -e`进入编辑界面，写入下面定时任务指令，路径内的**user**换成自己的并指向正确的路径，然后`Ctrl+o`再`回车`进行保存，`Ctrl+x`退出。
+
+```
+0 */1 * * * nohup /home/user/sh/check-process.sh >/dev/null 2>&1 &
+```
+
+- 完成任务添加后，可以用`crontab -l`来查看。
+
+> [!Note]
 > 
+> 2024-9-15：Serv00的IP地址应该是被墙，无法连接，Hysteria就废了，只可使用argo隧道和socks5代理。
+
+ 
